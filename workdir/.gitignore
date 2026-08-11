@@ -1,0 +1,11 @@
+.DS_Store
+.__*
+*.out
+*.xsm
+lex.yy.c
+y.tab.c
+y.tab.h
+compiler
+workdir/Stage1/ex1/ex1
+workdir/Stage1/ex2/ex2
+workdir/Stage1/ex3/ex3
