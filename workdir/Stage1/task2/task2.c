@@ -17,6 +17,10 @@ void freeReg() {
     if (current_reg >= 0) {
         current_reg--;
     }
+    else {
+        printf("Error: No registers to free\n");
+        exit(1);
+    }
 }
 
 struct tnode* makeLeafNode(int n) {

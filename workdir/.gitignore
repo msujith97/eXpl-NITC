@@ -1,11 +1,17 @@
-.DS_Store
-.__*
-*.out
-*.xsm
+# 1. Ignore everything by default
+*
+
+# 2. Allow Git to search inside subdirectories
+!*/
+
+# 3. Track only desired source file types
+!*.c
+!*.h
+!*.l
+!*.y
+!*.expl
+
+# 4. Re-ignore Lex/Yacc generated C & header files
 lex.yy.c
 y.tab.c
 y.tab.h
-compiler
-workdir/Stage1/ex1/ex1
-workdir/Stage1/ex2/ex2
-workdir/Stage1/ex3/ex3

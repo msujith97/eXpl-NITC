@@ -1,0 +1,5 @@
+begin
+read(a);
+b = a + 10;
+write(b);
+end;
