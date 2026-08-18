@@ -71,7 +71,7 @@ void yyerror(const char *s) {
     printf("yyerror %s:%s\n", s,yytext);
 }
 int main() {
-    yyin = fopen("input.expl", "r");
+    yyin = fopen("max.expl", "r");
     yyparse();
     return 0;
 }
