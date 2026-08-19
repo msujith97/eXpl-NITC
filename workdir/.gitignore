@@ -16,5 +16,6 @@
 # 4. Re-ignore Lex/Yacc generated C & header files
 lex.yy.c
 lex.yy.trans.c
+lex_translate.c
 y.tab.c
 y.tab.h

@@ -1,0 +1,16 @@
+begin
+    a = 0;
+    while (a < 10) do
+        a = a + 1;
+        
+        if (a == 5) then
+            continue;
+        endif;
+
+        if (a == 8) then
+            break;
+        endif;
+
+        write(a);
+    endwhile;
+end
