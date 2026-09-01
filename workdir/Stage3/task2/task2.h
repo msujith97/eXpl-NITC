@@ -1,4 +1,3 @@
-#include <stdio.h>
 typedef enum Nodetype
 {
     VARIABLE,
@@ -31,8 +30,10 @@ typedef struct AST_Node
 struct AST_Node *makeConstantLeafNode(Type, int, char *);
 struct AST_Node *makeVariableLeafNode(Type, char, char *);
 struct AST_Node *makeNode(Nodetype, Type, struct AST_Node *, struct AST_Node *, struct AST_Node *, char *);
-void print_tree(struct AST_Node *root, int lvl, int isLast);
+void print_tree(struct AST_Node *root, int lvl, int isRight);
 int getReg();
 void freeReg();
+int getAddr(char *c);
 int getLabel();
 int codeGen(struct AST_Node *, FILE *);
+

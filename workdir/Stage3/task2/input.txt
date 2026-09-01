@@ -1,0 +1,7 @@
+begin
+     a = 5;
+     b = 10;
+    while(a < b) do a=a+1; endwhile;
+    write(a);
+    write(b);
+end;

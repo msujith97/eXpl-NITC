@@ -1,8 +1,18 @@
 begin
     read(a);
-    if (a < 10) then
-        write(a);
+    read(b);
+    read(c);
+    if (a > b) then
+        if(a > c) then 
+            write(a);
+        else 
+            write(c);
+        endif;
     else
-        write(0);
+        if(b>c) then
+            write(b);
+        else
+            write(c);
+        endif;
     endif;
 end;

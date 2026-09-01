@@ -5,7 +5,7 @@
 	#include "task2.h"
 
 	int number;
-    void yyerror(const char *s);
+	void yyerror(char const *s);
 %}
 
 %%

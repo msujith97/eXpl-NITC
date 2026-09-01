@@ -1,6 +1,6 @@
-#include <string.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "task2.h"
 
 struct AST_Node *makeVariableLeafNode(Type type, char varname, char *s)
@@ -75,34 +75,20 @@ void printIndent(int depth, int isRight) {
     }
 }
 
-
-
-void print_tree(struct AST_Node *root, int lvl, int isLast) {
-    if (root == NULL) return;
-    printIndent(lvl, isLast);
-    if (root->s != NULL) {
+void print_tree(struct AST_Node *root, int lvl, int isRight)
+{
+	for(int i = 0; i < lvl; i++) printf(" ");
+    if (root)
+    {
+    	printIndent(lvl, isRight);
         printf("%s\n", root->s);
-    } else {
-        printf("%d\n", root->val);
-    }
-    int childCount = 0;
-    if (root->left != NULL) childCount++;
-    if (root->mid != NULL) childCount++;
-    if (root->right != NULL) childCount++;
-    int currentChild = 0;
-    if (root->left != NULL) {
-        currentChild++;
-        print_tree(root->left, lvl + 1, currentChild == childCount);
-    }
-    if (root->mid != NULL) {
-        currentChild++;
-        print_tree(root->mid, lvl + 1, currentChild == childCount);
-    }
-    if (root->right != NULL) {
-        currentChild++;
-        print_tree(root->right, lvl + 1, currentChild == childCount);
+        if (root->left != NULL)
+        	print_tree(root->left, lvl + 1, 0);
+        if (root->right != NULL)
+        	print_tree(root->right, lvl + 1, 1);
     }
 }
+
 
 //--------------------------------Reg Functions Start
 int free_reg = -1;
@@ -145,10 +131,13 @@ int codeGen(struct AST_Node *t, FILE *target_file)
         addr = getAddr(t->left->varname);
         fprintf(target_file, "MOV R%d, \"Read\"\n", p);
         fprintf(target_file, "PUSH R%d\n", p);
+
         fprintf(target_file, "MOV R%d, -1\n", p);
         fprintf(target_file, "PUSH R%d\n", p);
+
         fprintf(target_file, "MOV R%d, %d\n", p, addr);
         fprintf(target_file, "PUSH R%d\n", p);
+
         fprintf(target_file, "PUSH R%d\n", p);
         fprintf(target_file, "PUSH R%d\n", p);
         fprintf(target_file, "CALL 0\n");
@@ -167,9 +156,12 @@ int codeGen(struct AST_Node *t, FILE *target_file)
         q = getReg();
         fprintf(target_file, "MOV R%d, \"Write\"\n", q);
         fprintf(target_file, "PUSH R%d\n", q);
+
         fprintf(target_file, "MOV R%d, -2\n", q);
         fprintf(target_file, "PUSH R%d\n", q);
+
         fprintf(target_file, "PUSH R%d\n", p);
+        
         fprintf(target_file, "PUSH R%d\n", q);
         fprintf(target_file, "PUSH R%d\n", q);
         fprintf(target_file, "CALL 0\n");
@@ -267,10 +259,10 @@ int codeGen(struct AST_Node *t, FILE *target_file)
         r = getLabel();
         fprintf(target_file, "JZ R%d, L%d\n", p, r);
         freeReg();
-        codeGen(t->right, target_file);
+        p = codeGen(t->right, target_file);
         fprintf(target_file, "JMP L%d\n", s);
         fprintf(target_file, "L%d:\n", r);
-        return -1;
+        return p;
     }
 
     else if (t->nodetype == IF)
@@ -279,21 +271,20 @@ int codeGen(struct AST_Node *t, FILE *target_file)
         s = getLabel();
         fprintf(target_file, "JZ R%d, L%d\n", p, s);
         freeReg();
+        p = codeGen(t->mid, target_file);
         if (t->right != NULL)
         {
             r = getLabel();
-            codeGen(t->mid, target_file);
             fprintf(target_file, "JMP L%d\n", r);
             fprintf(target_file, "L%d:\n", s);
-            codeGen(t->right, target_file);
+            p = codeGen(t->right, target_file);
             fprintf(target_file, "L%d:\n", r);
         }
         else
         {
-            codeGen(t->mid, target_file);
             fprintf(target_file, "L%d:\n", s);
         }
-        return -1;
+        return p;
     }
 }
 //--------------------------------Code Gen Functions End

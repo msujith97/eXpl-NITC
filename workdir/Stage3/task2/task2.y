@@ -14,7 +14,7 @@
 	struct AST_Node *node;
 }
 
-%type <node> program stmt_list stmt expr InputStmt OutputStmt AsgStmt IfStmt WhileStmt
+%type <node> program stmt_list stmt expr InputStmt OutputStmt AsgStmt IfStmt WhileStmt 
 %token PLUS_ MINUS_ MUL_ DIV_ LT_ GT_ LE_ GE_ NE_ EQ_
 %token BEGIN_ END_ READ_ WRITE_ IF_ THEN_ ELSE_ ENDIF_ WHILE_ DO_ ENDWHILE_
 %token <node> ID_ NUM_
@@ -25,24 +25,18 @@
 %%
 
 program : BEGIN_ stmt_list END_ {
-								$$ = $2;
+					$$ = $2;
 
-								print_tree($2, 0, 0);
+					FILE *fp = fopen("code.xsm", "w");
+					fprintf(fp, "0\n2056\n0\n0\n0\n0\n0\n0\n");
+					fprintf(fp, "MOV SP, 4122\n");
+					int p = codeGen($2, fp);
+					fprintf(fp, "INT 10\n");
 
-								FILE *fp = fopen("code.xsm", "w");
-								fprintf(fp, "0\n2056\n0\n0\n0\n0\n0\n0\n");
-								fprintf(fp, "MOV SP, 4095\n");
-								int p = codeGen($2, fp);
-								fprintf(fp, "MOV R0, \"Exit\"\n");
-                                fprintf(fp, "PUSH R0\n");
-                                fprintf(fp, "PUSH R0\n");
-                                fprintf(fp, "PUSH R0\n");
-                                fprintf(fp, "PUSH R0\n");
-                                fprintf(fp, "PUSH R0\n");
-                                fprintf(fp, "CALL 0\n");
-          						fclose(fp);
-								exit(0);
-							}
+          				fclose(fp);
+
+					exit(0);
+				}
 		| BEGIN_ END_ {
 			printf("Empty Program\n");
 			printf("Parsing Successful\n");
@@ -93,7 +87,7 @@ void yyerror(char const *s)
 
 int main(void) 
 {
-    yyin=fopen("input.expl","r");
+    yyin=fopen("input.txt","r");
 	yyparse();
 	
 	return 0;
