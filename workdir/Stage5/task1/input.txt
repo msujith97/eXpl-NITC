@@ -1,0 +1,11 @@
+decl
+    int x, a[10];
+    str name;
+    int factorial(int n);
+    str concat(str s1, str s2);
+enddecl
+
+int main() {
+    begin
+    end
+}
