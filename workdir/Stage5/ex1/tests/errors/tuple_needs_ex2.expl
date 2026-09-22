@@ -1,0 +1,8 @@
+decl
+ tuple p(int x) a;
+enddecl
+int main() {
+ begin
+ return 0;
+ end
+}

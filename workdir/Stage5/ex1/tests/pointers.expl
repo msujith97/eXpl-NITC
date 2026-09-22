@@ -1,0 +1,65 @@
+// Exercise 1: pointers, including pointers to locals passed to functions
+decl
+    int g;
+    int swap(int *p, int *q), inc(int *p);
+    int *pick(int *p, int *q, int first);
+enddecl
+
+int swap(int *p, int *q) {
+    decl
+        int t;
+    enddecl
+    begin
+        t = *p;
+        *p = *q;
+        *q = t;
+        return 0;
+    end
+}
+
+int inc(int *p) {
+    begin
+        *p = *p + 1;
+        return *p;
+    end
+}
+
+// function returning a pointer
+int *pick(int *p, int *q, int first) {
+    decl
+        int *res;
+    enddecl
+    begin
+        if (first == 1) then
+            res = p;
+        else
+            res = q;
+        endif;
+        return res;
+    end
+}
+
+int main() {
+    decl
+        int a, b, x;
+        int *pa;
+    enddecl
+    begin
+        a = 10;
+        b = 20;
+        x = swap(&a, &b);
+        write(a);
+        write(b);
+        pa = &a;
+        x = inc(pa);
+        write(a);
+        g = 5;
+        x = inc(&g);
+        write(g);
+        x = 7;
+        *pick(&a, &x, 2) = 70;          // write through a returned pointer
+        write(x);
+        write("done");
+        return 0;
+    end
+}

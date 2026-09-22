@@ -1,0 +1,47 @@
+decl
+    int fib(int n), fibIter(int n);
+enddecl
+
+int fib(int n) {
+    decl
+        int r;
+    enddecl
+    begin
+        if (n <= 1) then
+            r = n;
+        else
+            r = fib(n - 1) + fib(n - 2);
+        endif;
+        return r;
+    end
+}
+
+int fibIter(int n) {
+    decl
+        int a, b, t, i;
+    enddecl
+    begin
+        a = 0;
+        b = 1;
+        i = 0;
+        while (i < n) do
+            t = a + b;
+            a = b;
+            b = t;
+            i = i + 1;
+        endwhile;
+        return a;
+    end
+}
+
+int main() {
+    decl
+        int n;
+    enddecl
+    begin
+        read(n);
+        write(fib(n));
+        write(fibIter(n));
+        return 0;
+    end
+}
