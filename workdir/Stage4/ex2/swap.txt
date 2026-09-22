@@ -1,0 +1,14 @@
+decl
+	int a, b, *p, *q, temp;
+enddecl
+begin
+    read(a);
+    read(b);
+    p = &a;
+    q = &b;
+    temp = *p;
+    *p = *q;
+    *q = temp;
+    write(a);
+    write(b);
+end
