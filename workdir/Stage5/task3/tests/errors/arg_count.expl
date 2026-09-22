@@ -1,0 +1,15 @@
+decl
+ int f(int a);
+enddecl
+int f(int a) {
+ begin
+ return a;
+ end
+}
+int main() {
+ decl int x; enddecl
+ begin
+ x = f(1, 2);
+ return 0;
+ end
+}

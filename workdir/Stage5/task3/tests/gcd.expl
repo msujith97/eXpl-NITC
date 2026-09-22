@@ -1,0 +1,54 @@
+// Extended Euclid: finds gcd(a, b) and x, y such that a*x + b*y = gcd
+decl
+    int gx, gy;
+    int extgcd(int a, int b), gcd(int a, int b);
+enddecl
+
+int gcd(int a, int b) {
+    decl
+        int r;
+    enddecl
+    begin
+        if (b == 0) then
+            r = a;
+        else
+            r = gcd(b, a % b);
+        endif;
+        return r;
+    end
+}
+
+int extgcd(int a, int b) {
+    decl
+        int d, t;
+    enddecl
+    begin
+        if (b == 0) then
+            gx = 1;
+            gy = 0;
+            d = a;
+        else
+            d = extgcd(b, a % b);
+            t = gx;
+            gx = gy;
+            gy = t - (a / b) * gy;
+        endif;
+        return d;
+    end
+}
+
+int main() {
+    decl
+        int a, b, d;
+    enddecl
+    begin
+        read(a);
+        read(b);
+        write(gcd(a, b));
+        d = extgcd(a, b);
+        write(d);
+        write(gx);
+        write(gy);
+        return 0;
+    end
+}

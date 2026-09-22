@@ -1,0 +1,8 @@
+decl
+ int swap(int *p, int *q);
+enddecl
+int main() {
+ begin
+ return 0;
+ end
+}
