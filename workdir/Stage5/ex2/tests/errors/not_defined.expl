@@ -1,0 +1,8 @@
+decl
+ int f(int a);
+enddecl
+int main() {
+ begin
+ return 0;
+ end
+}

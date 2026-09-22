@@ -1,0 +1,29 @@
+// The "constant program": f(n) = 91 for n <= 100 (McCarthy 91)
+decl
+    int f(int n);
+enddecl
+
+int f(int n) {
+    decl
+        int r;
+    enddecl
+    begin
+        if (n > 100) then
+            r = n - 10;
+        else
+            r = f(f(n + 11));
+        endif;
+        return r;
+    end
+}
+
+int main() {
+    decl
+        int n;
+    enddecl
+    begin
+        read(n);
+        write(f(n));
+        return 0;
+    end
+}

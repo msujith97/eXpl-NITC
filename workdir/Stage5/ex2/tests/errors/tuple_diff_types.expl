@@ -1,0 +1,10 @@
+decl
+ tuple p1(int x, int y) a;
+ tuple p2(int x, int y) b;
+enddecl
+int main() {
+ begin
+ a = b;
+ return 0;
+ end
+}

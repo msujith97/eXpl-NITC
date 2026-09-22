@@ -1,0 +1,9 @@
+decl
+ int f(tuple student s);
+ tuple student(str name, int roll) a;
+enddecl
+int main() {
+ begin
+ return 0;
+ end
+}

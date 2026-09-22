@@ -1,0 +1,62 @@
+// Exercise 2: tuples (global and local), field access, tuple assignment, tuple pointers, nesting
+decl
+    tuple student(str name, int roll_no, str branchname, int year_of_admission) a, b, c, *sptr;
+    tuple faculty(str name, int employee_id, str dept) x, y, z, *fptr;
+    tuple point(int x, int y);
+    tuple rect(tuple point lo, tuple point hi) r;
+    int area();
+enddecl
+
+int area() {
+    begin
+        return (r.hi.x - r.lo.x) * (r.hi.y - r.lo.y);
+    end
+}
+
+int main() {
+    decl
+        tuple student local;
+        tuple point p;
+        int n;
+    enddecl
+    begin
+        read(a.name);
+        read(x.name);
+        if (a.name == x.name) then
+            write("Same names");
+        else
+            write("Different names");
+        endif;
+
+        a.roll_no = 42;
+        a.branchname = "CSE";
+        a.year_of_admission = 2023;
+
+        b = a;                          // tuple assignment (same tuple type)
+        b.roll_no = 43;
+        write(b.name);
+        write(b.roll_no);
+        write(a.roll_no);               // a is unchanged: 42
+
+        local = b;                      // local tuple
+        write(local.branchname);
+
+        sptr = &c;                      // pointer to tuple
+        sptr->roll_no = 7;
+        sptr->name = "Carol";
+        *sptr = local;                  // assignment through tuple pointer (overwrites c)
+        write(c.roll_no);               // 43
+
+        fptr = &y;
+        fptr->employee_id = 1001;
+        write(y.employee_id);
+
+        p.x = 1;
+        p.y = 2;
+        r.lo = p;                       // nested tuples
+        r.hi.x = 6;
+        r.hi.y = 5;
+        write(area());                  // (6-1)*(5-2) = 15
+        return 0;
+    end
+}

@@ -1,0 +1,14 @@
+decl
+ tuple p1(int x, int y) a;
+ int f(tuple p1 t);
+enddecl
+int f(tuple p1 t) {
+ begin
+ return t.x;
+ end
+}
+int main() {
+ begin
+ return 0;
+ end
+}

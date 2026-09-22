@@ -1,0 +1,74 @@
+decl
+    int arr[10], n;
+    int bubble(int len), swap(int i, int j), readArr(int i), printArr(int i);
+enddecl
+
+int swap(int i, int j) {
+    decl
+        int t;
+    enddecl
+    begin
+        t = arr[i];
+        arr[i] = arr[j];
+        arr[j] = t;
+        return 0;
+    end
+}
+
+int bubble(int len) {
+    decl
+        int j, x;
+    enddecl
+    begin
+        if (len > 1) then
+            j = 0;
+            while (j < len - 1) do
+                if (arr[j] > arr[j + 1]) then
+                    x = swap(j, j + 1);
+                endif;
+                j = j + 1;
+            endwhile;
+            x = bubble(len - 1);
+        endif;
+        return 0;
+    end
+}
+
+int readArr(int i) {
+    decl
+        int x;
+    enddecl
+    begin
+        if (i < n) then
+            read(arr[i]);
+            x = readArr(i + 1);
+        endif;
+        return 0;
+    end
+}
+
+int printArr(int i) {
+    decl
+        int x;
+    enddecl
+    begin
+        if (i < n) then
+            write(arr[i]);
+            x = printArr(i + 1);
+        endif;
+        return 0;
+    end
+}
+
+int main() {
+    decl
+        int x;
+    enddecl
+    begin
+        read(n);
+        x = readArr(0);
+        x = bubble(n);
+        x = printArr(0);
+        return 0;
+    end
+}

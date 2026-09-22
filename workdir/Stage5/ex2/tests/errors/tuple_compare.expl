@@ -1,0 +1,9 @@
+decl
+ tuple p1(int x, int y) a, b;
+enddecl
+int main() {
+ begin
+ if (a == b) then write(1); endif;
+ return 0;
+ end
+}

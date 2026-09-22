@@ -1,0 +1,9 @@
+decl
+ tuple student(str name, int roll) a;
+enddecl
+int main() {
+ begin
+ a.age = 3;
+ return 0;
+ end
+}
